@@ -7,7 +7,7 @@ class PractitionerRole {
   {field} endpoint (0.., MS)
   {field} healthcareService(0.., MS)
 }
-class HealthcareService {
+class HealthcareService1 {
   {field} providedBy (1..1, MS, LDAP)
   {field} speciality (0.., MS, LDAP)
   {field} location (0.., MS, LDAP)
@@ -47,7 +47,7 @@ class Location {
   {field} hoursOfOperation (0.., MS)
   {field} availabilityExceptions (..1, MS)
 }
-class EndpointHealthcareService {
+class Endpoint1 {
   {field} status (1..1, MS)
   {field} connectionType (1..1, MS)
   {field} name (1..1, MS)
@@ -55,7 +55,7 @@ class EndpointHealthcareService {
   {field} payloadType (1.., MS)
   {field} address (1..1, MS)
 }
-class LocationHealthcareService {
+class Location1 {
   {field} name (..1, MS)
   {field} description (0..1, MS)
   {field} address (0..1, MS, LDAP)
@@ -72,47 +72,15 @@ class Organization {
   {field} telecom (0.., MS)
   {field} contact (0.., MS)
 }
-class HealthcareService2 {
-  {field} providedBy (1..1, MS, LDAP)
-  {field} speciality (0.., MS, LDAP)
-  {field} location (0.., MS, LDAP)
-  {field} name (..1, MS)
-  {field} telecom (0.., MS)
-  {field} serviceProvisionCode (0.., MS)
-  {field} communication (0.., MS)
-  {field} appointmentRequired (..1, MS)
-  {field} availableTime (0.., MS)
-  {field} availabilityExceptions (0.., MS)
-  {field} endpoint (0.., MS)
-}
-class EndpointHealthcareService2 {
-  {field} status (1..1, MS)
-  {field} connectionType (1..1, MS)
-  {field} name (1..1, MS)
-  {field} managingOrganization (0.., MS)
-  {field} payloadType (1.., MS)
-  {field} address (1..1, MS)
-}
-class LocationHealthcareService2 {
-  {field} name (..1, MS)
-  {field} description (0..1, MS)
-  {field} address (0..1, MS, LDAP)
-  {field} position (0..1, MS)
-  {field} hoursOfOperation (0.., MS)
-  {field} availabilityExceptions (..1, MS)
-}
+
 PractitionerRole o-- Practitioner: practitioner
 PractitionerRole o-- Endpoint: endpoint
 PractitionerRole o-- Location: location
 
 
-HealthcareService o-- Organization: providedBy
-HealthcareService o-- EndpointHealthcareService: endpoint
-HealthcareService o-- LocationHealthcareService: location
+HealthcareService1 o-- Organization: providedBy
+HealthcareService1 o-- Endpoint1: endpoint
+HealthcareService1 o-- Location1: location
 
-HealthcareService2 o-- Organization: providedBy
-HealthcareService2 o-- EndpointHealthcareService2: endpoint
-HealthcareService2 o-- LocationHealthcareService2: location
-
-PractitionerRole -right-> HealthcareService: healthcareService
+PractitionerRole -right-> HealthcareService1: healthcareService
 @enduml
