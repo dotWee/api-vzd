@@ -1,0 +1,118 @@
+@startuml ObjectDiagram.PractitionerRole
+skinparam monochrome true
+
+object PractitionerRole {
+  {field} practitioner (1..1, MS, LDAP)
+  {field} location (0.., MS)
+  {field} endpoint (0.., MS)
+  {field} healthcareService(0.., MS)
+}
+object HealthcareService1 {
+  {field} providedBy (1..1, MS, LDAP)
+  {field} speciality (0.., MS, LDAP)
+  {field} location (0.., MS, LDAP)
+  {field} name (..1, MS)
+  {field} telecom (0.., MS)
+  {field} serviceProvisionCode (0.., MS)
+  {field} communication (0.., MS)
+  {field} appointmentRequired (..1, MS)
+  {field} availableTime (0.., MS)
+  {field} availabilityExceptions (0.., MS)
+  {field} endpoint (0.., MS)
+}
+object Practitioner {
+  {field} identifier (1.., MS, LDAP)
+  {field} active (1..1, MS, LDAP)
+  {field} name (1..1, MS, LDAP)
+  {field} telecom (0.., MS)
+  {field} gender (..1, MS)
+  {field} birthDate (..1, MS)
+  {field} photo (0.., MS)
+  {field} qualification (0.., MS, LDAP)
+  {field} communication (0.., MS)
+}
+object Endpoint {
+  {field} status (1..1, MS)
+  {field} connectionType (1..1, MS)
+  {field} name (1..1, MS)
+  {field} managingOrganization (0..1, MS)
+  {field} payloadType (1.., MS)
+  {field} address (1..1, MS)
+}
+object Location {
+  {field} name (..1, MS)
+  {field} description (..1, MS)
+  {field} address (..1, MS)
+  {field} position (..1, MS)
+  {field} hoursOfOperation (0.., MS)
+  {field} availabilityExceptions (..1, MS)
+}
+object Endpoint1 {
+  {field} status (1..1, MS)
+  {field} connectionType (1..1, MS)
+  {field} name (1..1, MS)
+  {field} managingOrganization (0.., MS)
+  {field} payloadType (1.., MS)
+  {field} address (1..1, MS)
+}
+object Location1 {
+  {field} name (..1, MS)
+  {field} description (0..1, MS)
+  {field} address (0..1, MS, LDAP)
+  {field} position (0..1, MS)
+  {field} hoursOfOperation (0.., MS)
+  {field} availabilityExceptions (..1, MS)
+}
+object Organization {
+  {field} identifier (0.., MS, LDAP)
+  {field} active (1..1, MS, LDAP)
+  {field} type (1..1, MS, LDAP)
+  {field} name (1..1, MS, LDAP)
+  {field} alias (0.., MS, LDAP)
+  {field} telecom (0.., MS)
+  {field} contact (0.., MS)
+}
+object HealthcareService2 {
+  {field} providedBy (1..1, MS, LDAP)
+  {field} speciality (0.., MS, LDAP)
+  {field} location (0.., MS, LDAP)
+  {field} name (..1, MS)
+  {field} telecom (0.., MS)
+  {field} serviceProvisionCode (0.., MS)
+  {field} communication (0.., MS)
+  {field} appointmentRequired (..1, MS)
+  {field} availableTime (0.., MS)
+  {field} availabilityExceptions (0.., MS)
+  {field} endpoint (0.., MS)
+}
+object Endpoint2 {
+  {field} status (1..1, MS)
+  {field} connectionType (1..1, MS)
+  {field} name (1..1, MS)
+  {field} managingOrganization (0.., MS)
+  {field} payloadType (1.., MS)
+  {field} address (1..1, MS)
+}
+class Location2 {
+  {field} name (..1, MS)
+  {field} description (0..1, MS)
+  {field} address (0..1, MS, LDAP)
+  {field} position (0..1, MS)
+  {field} hoursOfOperation (0.., MS)
+  {field} availabilityExceptions (..1, MS)
+}
+PractitionerRole o-- Practitioner: practitioner
+PractitionerRole o-- Endpoint: endpoint
+PractitionerRole o-- Location: location
+
+
+HealthcareService1 o-- Organization: providedBy
+HealthcareService1 o-- Endpoint1: endpoint
+HealthcareService1 o-- Location1: location
+
+HealthcareService2 o-- Organization: providedBy
+HealthcareService2 o-- Endpoint2: endpoint
+HealthcareService2 o-- Location2: location
+
+PractitionerRole -right-> HealthcareService1: healthcareService
+@enduml
